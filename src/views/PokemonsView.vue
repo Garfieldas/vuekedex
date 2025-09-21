@@ -52,46 +52,10 @@
             </div>
 
             <!-- Pokemon Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Pokemon Card Template -->
-                <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" 
-                         alt="Bulbasaur"
-                         class="w-24 h-24 mx-auto">
-                    <h3 class="text-lg font-bold mt-2 text-gray-800">BULBASAUR</h3>
-                </div>
-                <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" 
-                         alt="Bulbasaur"
-                         class="w-24 h-24 mx-auto">
-                    <h3 class="text-lg font-bold mt-2 text-gray-800">BULBASAUR</h3>
-                </div>
-                <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" 
-                         alt="Bulbasaur"
-                         class="w-24 h-24 mx-auto">
-                    <h3 class="text-lg font-bold mt-2 text-gray-800">BULBASAUR</h3>
-                </div>
-                <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" 
-                         alt="Bulbasaur"
-                         class="w-24 h-24 mx-auto">
-                    <h3 class="text-lg font-bold mt-2 text-gray-800">BULBASAUR</h3>
-                </div>
-                <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" 
-                         alt="Bulbasaur"
-                         class="w-24 h-24 mx-auto">
-                    <h3 class="text-lg font-bold mt-2 text-gray-800">BULBASAUR</h3>
-                </div>
-                <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" 
-                         alt="Bulbasaur"
-                         class="w-24 h-24 mx-auto">
-                    <h3 class="text-lg font-bold mt-2 text-gray-800">BULBASAUR</h3>
-                </div>
-                <!-- Rest of the Pokemon cards... -->
-            </div>
+             <PokemonsList />
         </div>
     </main>
 </template>
+<script setup lang="ts">
+import PokemonsList from '@/components/Pokemons/PokemonsList.vue';
+</script>

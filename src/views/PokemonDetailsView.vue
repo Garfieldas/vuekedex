@@ -20,15 +20,37 @@
             >
               {{ pokemon.name }}
             </h1>
-            <button
-              class="px-4 sm:px-6 py-1 sm:py-2 bg-blue-400/50 backdrop-blur-sm 
-                     text-white rounded-lg hover:bg-blue-400/60 transition-all 
-                     font-bold text-sm sm:text-base whitespace-nowrap"
-              @click="$router.push({ name: 'pokemons' })"
-            >
-              BACK TO ALL!
-            </button>
+
+            <div class="flex flex-wrap items-center justify-center gap-2">
+              <button
+                class="px-4 sm:px-6 py-1 sm:py-2 bg-blue-400/50 backdrop-blur-sm 
+                       text-white rounded-lg hover:bg-blue-400/60 transition-all 
+                       font-bold text-sm sm:text-base whitespace-nowrap"
+                @click="smartBack"
+              >
+                BACK TO ALL!
+              </button>
+
+
+              <button
+                class="px-4 sm:px-6 py-1 sm:py-2 bg-white/20 backdrop-blur-sm 
+                       text-gray-800 rounded-lg hover:bg-white/30 border border-white/30
+                       transition-all font-bold text-sm sm:text-base whitespace-nowrap
+                       disabled:opacity-40 disabled:cursor-not-allowed"
+                :title="!isFav && isFull ? `Favorites full (${count}/${MAX})` : ''"
+                :disabled="!pokemon || (!isFav && isFull)"
+                @click="onToggleFavorite"
+              >
+                <span v-if="isFav">★ Remove Favorite</span>
+                <span v-else>☆ Add to Favorites ({{ count }}/{{ MAX }})</span>
+              </button>
+            </div>
+
+            <p v-if="lastError" class="text-xs text-red-600 text-center">
+              {{ lastError }}
+            </p>
           </div>
+
 
           <button
             class="px-3 sm:px-6 py-2 sm:py-3 bg-white/20 backdrop-blur-sm 
@@ -55,8 +77,9 @@
 
         <div class="pokemon-card rounded-3xl p-4 sm:p-8">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+
             <div class="order-2 sm:order-1">
-              <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300">
+              <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">
                 STATS | BASE
               </h2>
               <div class="space-y-2">
@@ -71,8 +94,9 @@
               </div>
             </div>
 
+
             <div class="order-1 sm:order-2">
-              <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300">
+              <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">
                 TRAITS | BASE
               </h2>
               <div class="space-y-2">
@@ -128,8 +152,9 @@
 
 <script setup lang="ts">
 import { getPokemons } from "@/services/pokemonsService";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useFavorites, type FavoritePokemon } from "@/composables/useFavorites";
 
 const props = defineProps<{ id: string }>();
 
@@ -137,7 +162,7 @@ const route = useRoute();
 const router = useRouter();
 
 const pokemon = ref<any>(null);
-const limit = ref();
+const { isFavorite, toggleFavorite, isFull, lastError, count, MAX } = useFavorites();
 
 const fetchPokemonData = async () => {
   try {
@@ -145,15 +170,14 @@ const fetchPokemonData = async () => {
     pokemon.value = response;
   } catch (error: any) {
     console.log(error);
+    router.replace({ name: "not-found", query: { from: route.fullPath } });
   }
 };
 
 function goToPrev() {
   if (!pokemon.value) return;
   const prevId = Number(pokemon.value.id) - 1;
-  if (prevId >= 1) {
-    router.push({ name: "pokemon-details", params: { id: prevId } });
-  }
+  if (prevId >= 1) router.push({ name: "pokemon-details", params: { id: prevId } });
 }
 
 function goToNext() {
@@ -162,9 +186,43 @@ function goToNext() {
   router.push({ name: "pokemon-details", params: { id: nextId } });
 }
 
-onMounted(fetchPokemonData)
-watch(
-  () => route.params.id,
-  () => fetchPokemonData()
-);
+onMounted(fetchPokemonData);
+watch(() => route.params.id, fetchPokemonData);
+
+function smartBack() {
+  const prev = router.options.history.state?.back as string | undefined;
+
+  const favHref = router.resolve({ name: "favorite-pokemons" }).href;
+  const listHref = router.resolve({ name: "pokemons" }).href;
+  const endsWith = (a?: string, b?: string) => !!a && !!b && a.endsWith(b);
+
+  if (endsWith(prev, favHref) || endsWith(prev, listHref)) {
+    return router.go(-1);
+  }
+
+  const from = route.query.from as string | undefined;
+  if (from === "favorite-pokemons") {
+    return router.push({ name: "favorite-pokemons" });
+  }
+  return router.push({ name: "pokemons" });
+}
+
+const isFav = computed(() => (pokemon.value ? isFavorite(pokemon.value.id) : false));
+const favPayload = computed<FavoritePokemon | null>(() => {
+  if (!pokemon.value) return null;
+  const img =
+    pokemon.value.sprites?.other?.["official-artwork"]?.front_default ??
+    pokemon.value.sprites?.front_default ??
+    null;
+  return {
+    id: Number(pokemon.value.id),
+    name: String(pokemon.value.name),
+    image: img,
+  };
+});
+
+function onToggleFavorite() {
+  if (!favPayload.value) return;
+  toggleFavorite(favPayload.value);
+}
 </script>

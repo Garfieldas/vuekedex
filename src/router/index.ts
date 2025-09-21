@@ -39,10 +39,15 @@ const router = createRouter({
       name: "favorite-pokemons",
       component: FavoritePokemonsView
     },
-    {
-      path: "/:patchMach(.*)*",
-      component: Error404
-    }
+    { 
+      path: '/404',
+      name: 'not-found',
+      component: Error404 
+    },
+    { 
+      path: '/:pathMatch(.*)*',
+      redirect: { name: 'not-found' }
+     },
   ]
 })
 

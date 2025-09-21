@@ -1,6 +1,5 @@
 <template>
     <main class="min-h-screen pb-12">
-        <!-- Header Section -->
         <div class="mb-8">
             <div class="max-w-7xl mx-auto px-4 py-6">
                 <h1 class="text-xl sm:text-4xl font-bold text-gray-700 text-center drop-shadow-lg">
@@ -10,52 +9,23 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4">
-            <!-- Search and Controls -->
             <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-                <!-- Search Bar -->
-                <div class="w-full sm:w-96">
-                    <div class="relative">
-                        <input type="text" 
-                               placeholder="Search by name..." 
-                               class="w-full px-4 py-2 rounded-lg border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent text-gray-800 placeholder-gray-500">
-                        <span class="absolute right-3 top-2.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Items per page selector -->
-                <div class="flex items-center gap-4">
-                    <label class="text-gray-700 font-medium">Items per page:</label>
-                    <select class="px-3 py-2 rounded-lg border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent text-gray-800 select-styles appearance-none pr-8">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-
-                <!-- Page Navigation -->
-                <div class="flex items-center gap-2">
-                    <button class="px-4 py-2 bg-white/20 backdrop-blur-sm text-gray-800 rounded-lg hover:bg-white/30 border border-white/30 transition-all duration-300">PREVIOUS</button>
-                    <button class="px-4 py-2 bg-white/20 backdrop-blur-sm text-gray-800 rounded-lg hover:bg-white/30 border border-white/30 transition-all duration-300">NEXT</button>
-                </div>
+                 <SearchBar />
+                <ItemsPerPage />
+                <PaginationControls />
             </div>
-
-            <!-- Page Numbers -->
             <div class="flex justify-center gap-2 mb-8">
                 <button class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm text-gray-800 flex items-center justify-center border border-white/30 hover:bg-white/30 transition-all duration-300">1</button>
                 <button class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm text-gray-800 flex items-center justify-center border border-white/30 hover:bg-white/30 transition-all duration-300">2</button>
                 <button class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm text-gray-800 flex items-center justify-center border border-white/30 hover:bg-white/30 transition-all duration-300">3</button>
             </div>
-
-            <!-- Pokemon Grid -->
              <PokemonsList />
         </div>
     </main>
 </template>
 <script setup lang="ts">
 import PokemonsList from '@/components/Pokemons/PokemonsList.vue';
+import SearchBar from '@/components/Controls/SearchBar.vue';
+import ItemsPerPage from '@/components/Controls/ItemsPerPage.vue';
+import PaginationControls from '@/components/Controls/PaginationControls.vue';
 </script>

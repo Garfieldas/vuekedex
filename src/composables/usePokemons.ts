@@ -9,7 +9,7 @@ export const usePokemons = () => {
         isLoading.value = true;
         try {
             const response = await getPokemons();
-            pokemons.value = response;
+            pokemons.value = response.results;
         }
         catch (error: any) {
             console.log(error);
@@ -18,7 +18,18 @@ export const usePokemons = () => {
             isLoading.value = false
         }
     }
+
+    const fetchPokemonImage = async (url: string) => {
+        try {
+            const response = await getPokemons(url);
+            const pokemonImage = response.sprites
+            return pokemonImage
+        }
+        catch (error: any) {
+            console.log(error);
+        }
+    }
     return {
-        pokemons, isLoading
+        pokemons, isLoading, fetchPokemons, fetchPokemonImage
     }
 }

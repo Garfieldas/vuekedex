@@ -1,7 +1,7 @@
 import { axiosConfig } from "./api.config";
 
 export const getPokemons = async (params?: string) => {
-    const url = params ? `/pokemons${params}` : '/pokemon';
+    const url = params ? `${params}` : '/pokemon';
     try {
         const response = await axiosConfig.get(url);
         const data = response.data;

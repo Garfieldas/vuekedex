@@ -19,7 +19,7 @@
                 <button class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm text-gray-800 flex items-center justify-center border border-white/30 hover:bg-white/30 transition-all duration-300">2</button>
                 <button class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm text-gray-800 flex items-center justify-center border border-white/30 hover:bg-white/30 transition-all duration-300">3</button>
             </div>
-             <PokemonsList />
+             <PokemonsList :pokemons="pokemons"/>
         </div>
     </main>
 </template>
@@ -28,4 +28,11 @@ import PokemonsList from '@/components/Pokemons/PokemonsList.vue';
 import SearchBar from '@/components/Controls/SearchBar.vue';
 import ItemsPerPage from '@/components/Controls/ItemsPerPage.vue';
 import PaginationControls from '@/components/Controls/PaginationControls.vue';
+import { usePokemons } from '@/composables/usePokemons';
+import { onMounted } from 'vue';
+
+const { pokemons, isLoading, fetchPokemons } = usePokemons();
+onMounted(async() => {
+    await fetchPokemons();
+})
 </script>

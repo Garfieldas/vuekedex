@@ -1,4 +1,5 @@
 <template>
+<routerLink :to="{ name: 'pokemon-details', params: { id: id } }">
   <div class="pokemon-card rounded-xl p-4 text-center border border-white/30">
     <img
       :src= imageSrc
@@ -7,6 +8,7 @@
     />
     <h3 class="text-lg font-bold mt-2 text-gray-800">{{ pokemon.name }}</h3>
   </div>
+</routerLink>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';

@@ -167,6 +167,7 @@ const fetchPokemonData = async () => {
     pokemon.value = response;
   } catch (error: any) {
     console.log(error);
+    router.replace({ name: 'not-found', query: { from: route.fullPath } })
   }
 };
 

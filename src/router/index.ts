@@ -3,6 +3,7 @@ import HomePageView from '@/views/HomePageView.vue'
 import PokemonsView from '@/views/PokemonsView.vue'
 import PokemonDetailsView from '@/views/PokemonDetailsView.vue'
 import FavoritePokemonsView from '@/views/FavoritePokemonsView.vue'
+import Error404 from '@/views/Error404.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,10 @@ const router = createRouter({
       name: "favorite-pokemons",
       component: FavoritePokemonsView
     },
+    {
+      path: "/:patchMach(.*)*",
+      component: Error404
+    }
   ]
 })
 

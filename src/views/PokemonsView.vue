@@ -10,7 +10,7 @@
 
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <SearchBar />
+        <GoBackBtn @back="goBack"/>
 
         <ItemsPerPage
           :model-value="itemsPerPage"
@@ -46,11 +46,12 @@
 
 <script setup lang="ts">
 import PokemonsList from '@/components/Pokemons/PokemonsList.vue';
-import SearchBar from '@/components/Controls/SearchBar.vue';
 import ItemsPerPage from '@/components/Controls/ItemsPerPage.vue';
 import PaginationControls from '@/components/Controls/PaginationControls.vue';
-import { onMounted, ref, computed } from 'vue';
+import { onMounted } from 'vue';
 import { usePokemons } from '@/composables/usePokemons';
+import GoBackBtn from '@/components/Controls/GoBackBtn.vue';
+import router from '@/router';
 
 const {
   pokemons, isLoading, error,
@@ -58,6 +59,8 @@ const {
   canPrev, canNext, rangeStart, rangeEnd,
   fetchPokemons, setPage, nextPage, prevPage, setItemsPerPage,
 } = usePokemons();
+
+const goBack = () => router.push('/')
 
 onMounted(fetchPokemons);
 </script>

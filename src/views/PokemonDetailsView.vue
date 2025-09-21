@@ -3,6 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 mb-8">
       <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-0">
         <div class="flex items-center justify-between w-full">
+
           <button
             class="px-3 sm:px-6 py-2 sm:py-3 bg-white/20 backdrop-blur-sm 
                    text-gray-700 rounded-lg hover:bg-white/30 transition-all 
@@ -12,6 +13,7 @@
           >
             ← PREVIOUS
           </button>
+
 
           <div class="flex flex-col items-center gap-2">
             <h1
@@ -31,6 +33,7 @@
                 BACK TO ALL!
               </button>
 
+
               <button
                 class="px-4 sm:px-6 py-1 sm:py-2 bg-white/20 backdrop-blur-sm 
                        text-gray-800 rounded-lg hover:bg-white/30 border border-white/30
@@ -49,6 +52,7 @@
               {{ lastError }}
             </p>
           </div>
+
 
           <button
             class="px-3 sm:px-6 py-2 sm:py-3 bg-white/20 backdrop-blur-sm 
@@ -75,6 +79,7 @@
 
         <div class="pokemon-card rounded-3xl p-4 sm:p-8">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+
             <div class="order-2 sm:order-1">
               <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">
                 STATS | BASE
@@ -90,6 +95,7 @@
                 </div>
               </div>
             </div>
+
 
             <div class="order-1 sm:order-2">
               <h2 class="text-lg sm:text-xl font-bold text-gray-800 mb-4">
@@ -167,7 +173,7 @@ const fetchPokemonData = async () => {
     pokemon.value = response;
   } catch (error: any) {
     console.log(error);
-    router.replace({ name: 'not-found', query: { from: route.fullPath } })
+    router.replace({ name: "not-found", query: { from: route.fullPath } });
   }
 };
 
@@ -196,7 +202,6 @@ function smartBack() {
   if (endsWith(prev, favHref) || endsWith(prev, listHref)) {
     return router.go(-1);
   }
-
 
   const from = route.query.from as string | undefined;
   if (from === "favorite-pokemons") {

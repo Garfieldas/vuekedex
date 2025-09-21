@@ -3,7 +3,6 @@
     <div class="max-w-7xl mx-auto px-4 mb-8">
       <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-0">
         <div class="flex items-center justify-between w-full">
-
           <button
             class="px-3 sm:px-6 py-2 sm:py-3 bg-white/20 backdrop-blur-sm 
                    text-gray-700 rounded-lg hover:bg-white/30 transition-all 
@@ -13,7 +12,6 @@
           >
             ← PREVIOUS
           </button>
-
 
           <div class="flex flex-col items-center gap-2">
             <h1
@@ -148,7 +146,6 @@
         </div>
       </div>
     </div>
-
     <div v-else class="text-center text-gray-500">Loading Pokémon…</div>
   </main>
 </template>

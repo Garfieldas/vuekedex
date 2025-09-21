@@ -29,7 +29,19 @@ export const usePokemons = () => {
             console.log(error);
         }
     }
+
+    const fetchSinglePokemon = async (id: string) => {
+        let url = `/pokemon/${id}`
+        try {
+            const response = await getPokemons(url);
+            const pokemon = response
+            return pokemon
+        }
+        catch (error: any) {
+            console.log(error);
+        }
+    }
     return {
-        pokemons, isLoading, fetchPokemons, fetchPokemonImage
+        pokemons, isLoading, fetchPokemons, fetchPokemonImage, fetchSinglePokemon
     }
 }

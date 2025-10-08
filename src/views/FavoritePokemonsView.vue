@@ -22,6 +22,7 @@
           >
             Clear all
           </button>
+    <!--flag 'bite' -->
         </div>
       </div>
     </div>
@@ -29,7 +30,6 @@
     <div class="max-w-7xl mx-auto px-4">
       <template v-if="favorites.length">
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!--flag 'bite' -->
           <article
             v-for="fav in favorites"
             :key="fav.id"

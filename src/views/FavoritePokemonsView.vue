@@ -22,7 +22,6 @@
           >
             Clear all
           </button>
-    <!--flag 'bite' -->
         </div>
       </div>
     </div>
